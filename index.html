@@ -904,10 +904,10 @@
             <p class="hero-subtitle">Aprés-Ski Hauptstadt der Alpen</p>
             
             <div class="hero-dates">
-                <div class="date-chip">Fr, 27. März — Abends los</div>
-                <div class="date-chip">Sa, 28. März — Anreise (Karfreitag)</div>
-                <div class="date-chip highlight">So, 29. März — Ostersonntag</div>
-                <div class="date-chip">Mo, 30. März — Skitag + Abreise (Ostermontag)</div>
+                <div class="date-chip">Fr, 3. April — Abends los</div>
+                <div class="date-chip">Sa, 4. April — Anreise (Karsamstag)</div>
+                <div class="date-chip highlight">So, 5. April — Ostersonntag</div>
+                <div class="date-chip">Mo, 6. April — Skitag + Abreise (Ostermontag)</div>
             </div>
             
             <div class="hero-stats">
@@ -1654,6 +1654,12 @@
                 skiEl.textContent = `🎿 ${skiLabel}: ${Math.round(skiMins / 60)}h`;
             }
 
+            // Ski Arlberg real operating hours (from skiarlberg.at)
+            // Lifts: 08:30 - 16:15 (last descent)
+            const LIFT_START = 8 * 60 + 30; // 08:30
+            const LIFT_END = 16 * 60 + 15;  // 16:15
+            const LIFT_HOURS = (LIFT_END - LIFT_START) / 60; // 7h 45min of skiing possible
+
             function renderTimeline() {
                 const hinKey = document.getElementById('hin-select').value;
                 const rueckKey = parseInt(document.getElementById('rueck-select').value);
@@ -1690,44 +1696,60 @@
                 // Breakfast after arrival
                 blocksSat.push(createBlock('meal', arrSat, arrSat + 60, '🍳 FRÜHSTÜCK', 'Ankunft & orientieren', SAT_START));
 
-                // Check if before or after 16:00
-                const checkinTime = Math.max(arrSat + 90, parseTime('16:00'));
-                if (checkinTime < parseTime('21:00')) {
-                    blocksSat.push(createBlock('checkin', arrSat + 60, checkinTime, '🏨 CHECK-IN', 'Ciao Amore', SAT_START));
-                    blocksSat.push(createBlock('ski', checkinTime, parseTime('21:00'), '🎿 SKI', 'Nachmittag/Abend', SAT_START));
-                } else {
-                    // Arrival after checkin time
-                    blocksSat.push(createBlock('free', arrSat + 60, parseTime('16:00'), '⏰ FREI', 'Warten auf Check-in', SAT_START));
-                    blocksSat.push(createBlock('checkin', parseTime('16:00'), parseTime('17:00'), '🏨 CHECK-IN', 'Ciao Amore', SAT_START));
-                    blocksSat.push(createBlock('ski', parseTime('17:00'), parseTime('21:00'), '🎿 SKI', 'Abend-Session!', SAT_START));
+                // Calculate ski time based on REAL lift hours (08:30 - 16:15)
+                // Ski can only start at LIFT_START (08:30) and must end by LIFT_END (16:15)
+                const skiStartSat = Math.max(arrSat + 90, LIFT_START); // min 90min after arrival or 08:30
+                const skiEndSat = LIFT_END; // 16:15 always
+
+                if (skiStartSat < skiEndSat) {
+                    // Before check-in wait time
+                    if (skiStartSat > arrSat + 60) {
+                        blocksSat.push(createBlock('free', arrSat + 60, skiStartSat, '⏰ FREI', 'Warten auf Lift-Öffnung', SAT_START));
+                    }
+                    // Check-in during ski hours
+                    const checkinStart = Math.min(parseTime('16:00'), skiStartSat);
+                    const checkinEnd = Math.max(parseTime('16:00'), skiStartSat);
+                    if (checkinStart < skiEndSat && checkinEnd > skiStartSat) {
+                        const actualCheckinStart = Math.max(skiStartSat, parseTime('14:00')); // Can check in early afternoon
+                        if (actualCheckinStart < skiEndSat) {
+                            blocksSat.push(createBlock('checkin', actualCheckinStart, Math.min(parseTime('17:00'), skiEndSat), '🏨 CHECK-IN', 'Ciao Amore', SAT_START));
+                        }
+                    }
+                    blocksSat.push(createBlock('ski', skiStartSat, skiEndSat, '🎿 SKI', `Lift: 08:30–16:15 = ${LIFT_HOURS.toFixed(1)}h max!`, SAT_START));
                 }
 
-                blocksSat.push(createBlock('meal', parseTime('19:00'), parseTime('21:00'), '🍝 ABENDESSEN', 'oder vorher', SAT_START));
-                blocksSat.push(createBlock('free', parseTime('21:00'), parseTime('22:00'), '☕ FREI', 'Apres-Ski / Ausklingen', SAT_START));
+                blocksSat.push(createBlock('meal', parseTime('17:00'), parseTime('19:00'), '🍝 ABENDESSEN', '', SAT_START));
+                blocksSat.push(createBlock('free', parseTime('19:00'), parseTime('22:00'), '☕ FREI', 'Apres-Ski', SAT_START));
                 blocksSat.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00') + 24*60, '🛏️ SCHLAF', 'Ciao Amore', SAT_START));
 
                 // =====================
-                // SONNTAG
+                // SONNTAG — REAL LIFT HOURS
                 // =====================
                 blocksSun.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00'), '🛏️ SCHLAF', '', SUN_START));
-                blocksSun.push(createBlock('meal', parseTime('08:00'), parseTime('09:00'), '🍳 FRÜHSTÜCK', 'Ciao Amore inkl.', SUN_START));
-                blocksSun.push(createBlock('ski', parseTime('09:00'), parseTime('12:30'), '🎿 SKI', 'Vormittag', SUN_START));
+                blocksSun.push(createBlock('meal', parseTime('08:00'), LIFT_START, '🍳 FRÜHSTÜCK', 'bis ' + formatTime(LIFT_START) + ' (Lift-Öffnung!)', SUN_START));
+                blocksSun.push(createBlock('ski', LIFT_START, parseTime('12:30'), '🎿 SKI', `Vormittag (Lift: 08:30–12:30)`, SUN_START));
                 blocksSun.push(createBlock('meal', parseTime('12:30'), parseTime('13:30'), '🍕 MITTAGESSEN', 'Berg oder Ort', SUN_START));
-                blocksSun.push(createBlock('ski', parseTime('13:30'), parseTime('17:00'), '🎿 SKI', 'Nachmittag', SUN_START));
-                blocksSun.push(createBlock('free', parseTime('17:00'), parseTime('19:00'), '☕ FREI', 'Apres-Ski', SUN_START));
-                blocksSun.push(createBlock('meal', parseTime('19:00'), parseTime('21:00'), '🍝 ABENDESSEN', 'Ort', SUN_START));
-                blocksSun.push(createBlock('free', parseTime('21:00'), parseTime('22:00'), '☕ FREI', 'Nachtleben?', SUN_START));
+                blocksSun.push(createBlock('ski', parseTime('13:30'), LIFT_END, '🎿 SKI', `Nachmittag (bis ${formatTime(LIFT_END)} = ${((LIFT_END - 13*60-30)/60).toFixed(1)}h)`, SUN_START));
+                blocksSun.push(createBlock('free', LIFT_END, parseTime('17:30'), '☕ FREI', 'Apres-Ski (Lift zu um 16:15!)', SUN_START));
+                blocksSun.push(createBlock('meal', parseTime('17:30'), parseTime('19:30'), '🍝 ABENDESSEN', 'Ort', SUN_START));
+                blocksSun.push(createBlock('free', parseTime('19:30'), parseTime('22:00'), '☕ FREI', 'Nachtleben?', SUN_START));
                 blocksSun.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00') + 24*60, '🛏️ SCHLAF', '', SUN_START));
 
                 // =====================
-                // MONTAG
+                // MONTAG — REAL LIFT HOURS + DEPARTURE
                 // =====================
                 const rueckDep = parseTime(rueck.dep);
+                const skiEndMon = Math.min(LIFT_END, rueckDep - 90); // Ski ends 90min before departure
                 blocksMon.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00'), '🛏️ SCHLAF', '', MON_START));
-                blocksMon.push(createBlock('meal', parseTime('08:00'), parseTime('09:00'), '🍳 FRÜHSTÜCK', 'Letztes!', MON_START));
-                blocksMon.push(createBlock('ski', parseTime('09:00'), rueckDep, '🎿 SKI', `Vormittag bis ${formatTime(rueckDep)}`, MON_START));
-                blocksMon.push(createBlock('free', rueckDep, rueckDep + 30, '🎒 PACKEN', 'Blitz-Transfer', MON_START));
-                blocksMon.push(createBlock('train', rueckDep + 30, parseTime(rueck.arr), '🚃 ZUG', rueck.label + ' → Heidelberg', MON_START));
+                blocksMon.push(createBlock('meal', parseTime('08:00'), LIFT_START, '🍳 FRÜHSTÜCK', 'Letztes! Bis ' + formatTime(LIFT_START), MON_START));
+                
+                if (LIFT_START < skiEndMon) {
+                    blocksMon.push(createBlock('ski', LIFT_START, skiEndMon, '🎿 SKI', `Vormittag bis ${formatTime(skiEndMon)} (letzter Lift 16:15!)`, MON_START));
+                } else {
+                    blocksMon.push(createBlock('free', LIFT_START, rueckDep - 90, '☕ FREI', 'Zu spät für Ski (Montag)', MON_START));
+                }
+                blocksMon.push(createBlock('free', rueckDep - 90, rueckDep - 30, '🎒 PACKEN', `Transfer Bahnhof (${Math.round((rueckDep - 30)/60 - 10)}min)`, MON_START));
+                blocksMon.push(createBlock('train', rueckDep - 30, parseTime(rueck.arr), '🚃 ZUG', rueck.label + ' → Heidelberg', MON_START));
                 blocksMon.push(createBlock('free', parseTime(rueck.arr), parseTime(rueck.arr) + 60, '🏠 ANKUNFT', 'Heidelberg', MON_START));
 
                 // Render
@@ -1861,6 +1883,37 @@
                 </p>
                 <p style="color: var(--text-muted); font-size: 0.875rem;">
                     <strong style="color: var(--accent-cyan);">Alternative:</strong> Skibus nutzen, Haltestelle direkt vor der Tür.
+                </p>
+            </div>
+            
+            <div class="card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 51, 102, 0.15) 0%, rgba(255, 107, 53, 0.05) 100%); border-color: var(--accent-neon);">
+                <h3 style="margin-bottom: 1rem; font-size: 1.25rem; color: var(--accent-neon);">🔥 Unterkunft BUCHEN — Ostern 3.-6. April 2026</h3>
+                <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+                    Ostern = Hochsaison! Zimmer werden knapp — jetzt buchen!
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://www.booking.com/searchresults.html?ss=St.+Anton+am+Arlberg&checkin=2026-04-03&checkout=2026-04-06" target="_blank" class="btn btn-primary" style="flex: 1; min-width: 200px; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Booking.com
+                    </a>
+                    <a href="https://www.airbnb.de/s/St--Anton--Oesterreich/homes?checkin=2026-04-03&checkout=2026-04-06" target="_blank" class="btn btn-secondary" style="flex: 1; min-width: 200px; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        </svg>
+                        Airbnb
+                    </a>
+                    <a href="https://www.trivago.de/st-anton-am-arlberg" target="_blank" class="btn btn-secondary" style="flex: 1; min-width: 200px; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        trivago
+                    </a>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem;">
+                    💡 Tipp: Filter auf Booking.com setzen: Bewertung 8+, Preis bis 100€/Nacht, Frühstück inkl.
                 </p>
             </div>
         </div>
