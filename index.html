@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Anton Ski Trip | Osterwochenende 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0b0f;
+            --bg-card: #12141a;
+            --bg-elevated: #1a1d25;
+            --border: #2a2e3a;
+            --text: #e8e9ed;
+            --text-muted: #7a7f8c;
+            --accent-neon: #ff3366;
+            --accent-cyan: #00d4ff;
+            --accent-gold: #ffd93d;
+            --gradient-neon: linear-gradient(135deg, #ff3366 0%, #ff6b35 100%);
+            --gradient-aurora: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #2d132c 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: var(--gradient-aurora);
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(255, 51, 102, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: aurora 20s ease-in-out infinite;
+        }
+
+        @keyframes aurora {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, 5%) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 51, 102, 0.2);
+            border: 1px solid var(--accent-neon);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-neon);
+            margin-bottom: 1.5rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 51, 102, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 51, 102, 0.6); }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            background: linear-gradient(180deg, #fff 0%, #a0a4b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .hero-dates {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .date-chip {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .date-chip.highlight {
+            background: var(--gradient-neon);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-muted);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(10, 11, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            border-bottom-color: var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-neon);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-neon);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 51, 102, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Trip Overview Grid */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .overview-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-neon);
+        }
+
+        .overview-card.icon-transport::before {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #0099cc 100%);
+        }
+
+        .overview-card.icon-skipass::before {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #ff9500 100%);
+        }
+
+        .overview-card.icon-budget::before {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+        }
+
+        .overview-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .icon-transport .overview-card-icon {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .icon-skipass .overview-card-icon {
+            background: rgba(255, 217, 61, 0.1);
+        }
+
+        .icon-budget .overview-card-icon {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .overview-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .overview-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .overview-card .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-top: 1rem;
+        }
+
+        /* Zug Section */
+        .zug-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .zug-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 212, 255, 0.02) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .zug-ticket-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .zug-ticket-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .zug-connection {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .zug-connection:last-child {
+            border-bottom: none;
+        }
+
+        .zug-station {
+            text-align: center;
+        }
+
+        .zug-station .time {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--text);
+        }
+
+        .zug-station .date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .zug-station .name {
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .zug-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .zug-arrow-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-neon) 100%);
+            position: relative;
+        }
+
+        .zug-arrow-line::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            border: 5px solid transparent;
+            border-left-color: var(--accent-neon);
+        }
+
+        .zug-arrow .duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .zug-trains {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .zug-train-chip {
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-elevated);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Unterkunft Section */
+        .unterkunft-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .unterkunft-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .unterkunft-main {
+            grid-column: 1 / -1;
+        }
+
+        .hotel-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hotel-type {
+            color: var(--accent-gold);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hotel-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin: 1rem 0;
+        }
+
+        .hotel-rating span {
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+        }
+
+        .hotel-rating span.empty {
+            color: var(--border);
+        }
+
+        .hotel-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-elevated);
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .feature-chip svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent-cyan);
+        }
+
+        .hotel-map {
+            background: var(--bg-elevated);
+            border-radius: 12px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Skipass Section */
+        .skipass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skipass-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .skipass-card.recommended {
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border-color: var(--accent-neon);
+        }
+
+        .skipass-card.recommended::after {
+            content: 'BESTE WAHL';
+            display: block;
+            padding: 0.25rem 0.75rem;
+            background: var(--gradient-neon);
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skipass-days {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text);
+        }
+
+        .skipass-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .skipass-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin: 1rem 0;
+        }
+
+        .skipass-per-day {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Budget Section */
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .budget-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .budget-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .budget-table td {
+            padding: 1rem 0;
+        }
+
+        .budget-table td:first-child {
+            color: var(--text-muted);
+        }
+
+        .budget-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .budget-table tr.total {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+        }
+
+        .budget-table tr.total td {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            padding: 1.5rem 1rem;
+        }
+
+        /* Nachtleben Section */
+        .nachtleben-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .location-card {
+            padding: 1.5rem;
+        }
+
+        .location-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-neon);
+            margin-bottom: 0.5rem;
+        }
+
+        .location-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Checklist Section */
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .checklist-column h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            background: var(--gradient-neon);
+            border-color: var(--accent-neon);
+        }
+
+        .checklist-item input[type="checkbox"]:checked::after {
+            content: '✓';
+            display: block;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 16px;
+        }
+
+        .checklist-item.packed {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-neon);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Nav */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Ticket Status */
+        .ticket-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .ticket-card {
+            background: var(--bg-elevated);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .ticket-card svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .ticket-card h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .ticket-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .ticket-status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #00ff88;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">ST.ANTON'26</a>
+            <div class="nav-links">
+                <a href="#uebersicht">Übersicht</a>
+                <a href="#zug">Zug & Ticket</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#unterkunft">Unterkunft</a>
+                <a href="#skipass">Skipass</a>
+                <a href="#budget">Budget</a>
+                <a href="#nachtleben">Nachtleben</a>
+                <a href="#packliste">Packliste</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Osterwochenende 2026</span>
+            <h1>St. Anton</h1>
+            <p class="hero-subtitle">Aprés-Ski Hauptstadt der Alpen</p>
+            
+            <div class="hero-dates">
+                <div class="date-chip">Fr, 27. März — Abends los</div>
+                <div class="date-chip">Sa, 28. März — Anreise (Karfreitag)</div>
+                <div class="date-chip highlight">So, 29. März — Ostersonntag</div>
+                <div class="date-chip">Mo, 30. März — Skitag + Abreise (Ostermontag)</div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">280<span style="font-size: 1.5rem;">cm</span></div>
+                    <div class="stat-label">Schnee (Berg)</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">83/85</div>
+                    <div class="stat-label">Lifte offen</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">281<span style="font-size: 1rem;">km</span></div>
+                    <div class="stat-label">Pisten offen</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">19.4.</div>
+                    <div class="stat-label">Saisonende</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="section" id="uebersicht">
+        <div class="section-header">
+            <span class="section-tag">Plan</span>
+            <h2 class="section-title">Dein Trip auf einen Blick</h2>
+        </div>
+        
+        <div class="overview-grid">
+            <div class="card overview-card icon-transport">
+                <div class="overview-card-icon">🚂</div>
+                <h3>FlexTicket</h3>
+                <p>Winterkulanz — Zugbindung aufgehoben, 1 Jahr gültig. Jeder Zug von Heidelberg nach St. Anton.</p>
+                <div class="price">€ 0*</div>
+                <small style="color: var(--text-muted); font-size: 0.7rem;">*Bereits bezahlt</small>
+            </div>
+            
+            <div class="card overview-card">
+                <div class="overview-card-icon">🏨</div>
+                <h3>Ciao Amore</h3>
+                <p>Pension im Ortszentrum. 750m zur Nassereinbahn. Check-in ab 16:00 Uhr.</p>
+                <div class="price">€ 180</div>
+                <small style="color: var(--text-muted); font-size: 0.7rem;">2 Nächte × 90€</small>
+            </div>
+            
+            <div class="card overview-card icon-skipass">
+                <div class="overview-card-icon">🎿</div>
+                <h3>Skipass</h3>
+                <p>3-Tage-Pass für Ski Arlberg. Gilt für alle 7 Orte: St. Anton, Lech, Zürs, Warth & mehr.</p>
+                <div class="price">€ 241</div>
+                <small style="color: var(--text-muted); font-size: 0.7rem;">Online vorbestellen!</small>
+            </div>
+            
+            <div class="card overview-card icon-budget">
+                <div class="overview-card-icon">💰</div>
+                <h3>Eigenes Equipment</h3>
+                <p>Eigene Ski + Skischuhe. Kein Verleih nötig — spart 50-80€.</p>
+                <div class="price">€ 0*</div>
+                <small style="color: var(--text-muted); font-size: 0.7rem;">*Bereits vorhanden</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zug Section -->
+    <section class="section" id="zug">
+        <div class="section-header">
+            <span class="section-tag">Anreise</span>
+            <h2 class="section-title">Zugverbindung mit FlexTicket</h2>
+        </div>
+        
+        <div class="zug-section">
+            <div class="zug-header">
+                <div class="zug-ticket-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22,4 12,14.01 9,11.01"/>
+                    </svg>
+                    Winterkulanz aktiv — Zugbindung aufgehoben
+                </div>
+                <p style="color: var(--text-muted); margin-top: 1rem;">
+                    Die konkreten Tickets bleiben privat auf dem Handy. Hier geht es nur um die Reiseplanung:
+                    flexibel anreisen, vor Ort maximal Ski mitnehmen und die Rückfahrt am Ostermontag entspannt halten.
+                </p>
+
+                <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: 12px; background: rgba(255, 217, 61, 0.08); border: 1px solid rgba(255, 217, 61, 0.35);">
+                    <strong style="color: var(--accent-gold); display: block; margin-bottom: 0.4rem;">Private Tickets bleiben privat</strong>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">
+                        Kein PDF-Upload, keine Buchungsnummern, kein Risiko beim Teilen des Links.
+                    </span>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--accent-cyan); margin: 1.5rem 0 1rem;">HINFAHRT: Heidelberg → St. Anton (Karfreitag Abend → Samstag früh)</h3>
+            <table class="budget-table" style="margin-bottom: 2rem; font-size: 0.8rem;">
+                <tr style="background: var(--bg-elevated);">
+                    <td><strong>#</strong></td>
+                    <td><strong>Abfahrt</strong></td>
+                    <td><strong>Ankunft</strong></td>
+                    <td><strong>Dauer</strong></td>
+                    <td><strong>Umstiege</strong></td>
+                    <td><strong>Züge</strong></td>
+                    <td><strong>Stops</strong></td>
+                    <td><strong>Umstiegszeiten</strong></td>
+                </tr>
+                <tr style="background: rgba(255,51,102,0.15);">
+                    <td>🌙 1<br><span style="font-size: 0.65rem; color: var(--accent-gold);">MAX SKI!</span></td>
+                    <td>Fr 17:13</td>
+                    <td>Sa 06:09</td>
+                    <td>12h 56min</td>
+                    <td>2</td>
+                    <td>ICE 1291<br>NJ 464 (Nightjet)</td>
+                    <td>HD→MA→FFM→M→IN→BL</td>
+                    <td>~45min M, ~30min IN</td>
+                </tr>
+                <tr>
+                    <td>🌙 2</td>
+                    <td>Fr 19:13</td>
+                    <td>Sa 06:09</td>
+                    <td>10h 56min</td>
+                    <td>4</td>
+                    <td>ICE 1097<br>ICE 613 + 2x Nightjet</td>
+                    <td>HD→...→M→...→IN→...</td>
+                    <td>4 Umstiege!</td>
+                </tr>
+                <tr style="background: rgba(255,51,102,0.15);">
+                    <td>🌙 3</td>
+                    <td>Fr 19:13</td>
+                    <td>Sa 06:46</td>
+                    <td>11h 33min</td>
+                    <td>3</td>
+                    <td>ICE 1097<br>ICE 613 + Nightjet</td>
+                    <td>HD→...→M→...→IN→...</td>
+                    <td>3 Umstiege</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Sa 02:25</td>
+                    <td>Sa 10:55</td>
+                    <td>8h 30min</td>
+                    <td>2</td>
+                    <td>ICE 619<br>RJX 368</td>
+                    <td>HD→S→UL→A→M→M-OST→IN→ST</td>
+                    <td>~12min M-Hbf<br>~45min M-Ost</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.15); border: 2px solid var(--accent-cyan);">
+                    <td><strong>⭐ 5</strong></td>
+                    <td><strong>Sa 04:17</strong></td>
+                    <td><strong>Sa 12:48</strong></td>
+                    <td>8h 31min</td>
+                    <td>2</td>
+                    <td>ICE 699</td>
+                    <td>HD→S→UL→A→M→IN→ST</td>
+                    <td>~30min M</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>6</td>
+                    <td>Sa 06:46</td>
+                    <td>Sa 14:55</td>
+                    <td>8h 09min</td>
+                    <td>3</td>
+                    <td>ICE 1098<br>ICE 525<br>RJX 162</td>
+                    <td>HD→MA→S→UL→M→ROS→KU→W→IN→ST</td>
+                    <td>~6min S<br>~45min M<br>~25min IN</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Sa 09:13</td>
+                    <td>Sa 16:55</td>
+                    <td>7h 42min</td>
+                    <td>2</td>
+                    <td>ICE 117<br>EC 164</td>
+                    <td>HD→MA→KA→S→UL→A→M→ST</td>
+                    <td>~6min MA<br>~48min M</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>8</td>
+                    <td>Sa 09:13</td>
+                    <td>Sa 18:13</td>
+                    <td>9h</td>
+                    <td>1</td>
+                    <td>ICE 117<br>RJX 87</td>
+                    <td>HD→MA→KA→S→UL→A→M→IN→ST</td>
+                    <td>~24min M<br><strong>★ 1 Umstieg!</strong></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Sa 09:36</td>
+                    <td>Sa 16:55</td>
+                    <td>7h 19min</td>
+                    <td>3</td>
+                    <td>ICE 1648<br>ICE 593<br>RJX 87, EC 164</td>
+                    <td>HD→...→S→...→M→...→ST</td>
+                    <td>3 Umstiege</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>10</td>
+                    <td>Sa 15:13</td>
+                    <td>Sa 22:58</td>
+                    <td>7h 45min</td>
+                    <td>2</td>
+                    <td>ICE 1095<br>ICE 1205<br>RJX 760</td>
+                    <td>HD→...→M→...→IN→ST</td>
+                    <td>2 Umstiege</td>
+                </tr>
+            </table>
+            
+            <details style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                <summary style="cursor: pointer; font-weight: 600; color: var(--accent-cyan);">
+                    Legende & Stop-Details (klicken für Erklärung)
+                </summary>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);">
+                    <div><strong>Stops:</strong> HD=Heidelberg, MA=Mannheim, FFM=Frankfurt, KA=Karlsruhe, S=Stuttgart, UL=Ulm, A=Augsburg, M=München, M-OST=München Ost, ROS=Rosenheim, KU=Kufstein, W=Wörgl, IN=Innsbruck, BL=Bludenz, ST=St. Anton</div>
+                    <div><strong>Umstiegszeiten:</strong> ~Xmin = Mindestumstiegszeit am Gleis. Mehr = komfortabler.</div>
+                    <div><strong>🌙</strong> = Nightliner/Overnight (Fr abend → Sa früh)</div>
+                    <div><strong>★</strong> = Empfehlung (wenig Umstiege, gute Zeiten)</div>
+                </div>
+            </details>
+
+            <h3 style="color: var(--accent-neon); margin: 1.5rem 0 1rem;">RÜCKFAHRT: St. Anton → Heidelberg (Ostermontag) — Geschätzt</h3>
+            <table class="budget-table" style="margin-bottom: 2rem; font-size: 0.8rem;">
+                <tr style="background: var(--bg-elevated);">
+                    <td><strong>#</strong></td>
+                    <td><strong>Abfahrt</strong></td>
+                    <td><strong>Ankunft</strong></td>
+                    <td><strong>Dauer</strong></td>
+                    <td><strong>Umstiege</strong></td>
+                    <td><strong>Züge (geschätzt)</strong></td>
+                    <td><strong>Stops</strong></td>
+                    <td><strong>Umstiegszeiten</strong></td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td><strong>⭐ 1</strong></td>
+                    <td>Mo 06:xx</td>
+                    <td>Mo 13:xx</td>
+                    <td>~7h</td>
+                    <td>1</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→S→HD</td>
+                    <td>~20min M<br><strong>★ 1 Umstieg!</strong></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Mo 07:xx</td>
+                    <td>Mo 14:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>3</td>
+                    <td>Mo 08:xx</td>
+                    <td>Mo 15:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Mo 09:xx</td>
+                    <td>Mo 16:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>5</td>
+                    <td>Mo 10:xx</td>
+                    <td>Mo 17:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Mo 11:xx</td>
+                    <td>Mo 18:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+                <tr style="background: rgba(0,212,255,0.1);">
+                    <td>7</td>
+                    <td>Mo 12:xx</td>
+                    <td>Mo 19:xx</td>
+                    <td>~7h</td>
+                    <td>1-2</td>
+                    <td>RJX<br>ICE</td>
+                    <td>ST→IN→M→UL→S→HD</td>
+                    <td>~20min M</td>
+                </tr>
+            </table>
+            
+            <details style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                <summary style="cursor: pointer; font-weight: 600; color: var(--accent-neon);">
+                    Rückfahrt Legende (klicken)
+                </summary>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);">
+                    <div><strong>Stops:</strong> ST=St. Anton, IN=Innsbruck, M=München, UL=Ulm, S=Stuttgart, HD=Heidelberg</div>
+                    <div><strong>RJX/ICE:</strong> Railjet Express oder ICE. Beide verkehren stündlich auf dieser Route.</div>
+                    <div><strong>★</strong> = Früheste Verbindung mit wenig Umstiegen</div>
+                </div>
+            </details>
+            
+            <div style="padding: 2rem; background: var(--bg-card); border-radius: 12px; margin-top: 1rem; border: 2px solid var(--accent-gold);">
+                <h4 style="margin-bottom: 1rem; font-size: 0.875rem; color: var(--accent-gold);">⭐ OPTIMALE VERBINDUNG (Deine Prioritäten: Sa MAX ski, Mo kein ski vor Mittag)</h4>
+                <div class="ticket-status">
+                    <div class="ticket-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        <h4>Hinfahrt</h4>
+                        <p><strong>Sa 04:17</strong> ab Heidelberg → <strong>Sa 12:48</strong> an St. Anton</p>
+                        <span class="ticket-status-badge" style="background: var(--accent-cyan);">8h31min, 2 Umstiege</span>
+                        <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">Stops: HD→S→UL→A→M→IN→ST</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--accent-cyan);">★ FRÜH ankommen = mehr Ski Sa!</p>
+                    </div>
+                    <div class="ticket-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        <h4>Check-in</h4>
+                        <p>~13:00 — <strong>Skifahren ab 13:30!</strong></p>
+                        <span class="ticket-status-badge" style="background: var(--accent-neon);">Früher Check-in? Frag nach!</span>
+                        <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">Ankunft 12:48 → Mittagessen → Ski ab ~13:30</p>
+                    </div>
+                    <div class="ticket-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <h4>Rückfahrt</h4>
+                        <p><strong>Mo 11:xx-12:xx</strong> ab St. Anton → <strong>Mo 18-19xx</strong> Heidelberg</p>
+                        <span class="ticket-status-badge" style="background: var(--accent-gold);">~7h, 1-2 Umstiege, NACH MITTAG</span>
+                        <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">Ausschlafen, gemütlich Frühstücken, Packen</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-elevated); border-radius: 8px;">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 0.5rem;">🎿 Ski-Zeit Summary (Deine Prioritäten)</h5>
+                    <div style="display: flex; gap: 2rem; font-size: 0.85rem;">
+                        <div><strong>Sa:</strong> ~8-9h <span style="color: var(--accent-cyan);">(13:30-21:00 + Abend)</span></div>
+                        <div><strong>So:</strong> ~8h <span style="color: var(--accent-cyan);">(voller Tag)</span></div>
+                        <div><strong>Mo:</strong> 0h <span style="color: var(--text-muted);">(entspannt zurück)</span></div>
+                        <div><strong>Total:</strong> ~16-17h <span style="color: var(--accent-gold);">★★★</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem;">
+                * Rückfahrtdaten geschätzt basierend auf typischen Verbindungen. Mit Kulanz-Ticket kannst du JEDEN Zug nehmen.
+                🌙 = Nachtverbindung (Freitag Abend startet, kommt Samstag früh an)
+            </p>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section" id="timeline">
+        <div class="section-header">
+            <span class="section-tag">Zeitplan</span>
+            <h2 class="section-title">Interaktive Trip-Timeline</h2>
+        </div>
+        
+        <div class="timeline-controls">
+            <div class="timeline-select-group">
+                <label for="hin-select">Hinfahrt (Heidelberg → St. Anton)</label>
+                <select id="hin-select">
+                    <option value="1">🌙 1 — Fr 17:13 → Sa 06:09 (Nightjet, MAX SKI!)</option>
+                    <option value="4">4 — Sa 02:25 → Sa 10:55</option>
+                    <option value="5" selected>5 — Sa 04:17 → Sa 12:48 (EMPFOHLEN)</option>
+                    <option value="6">6 — Sa 06:46 → Sa 14:55</option>
+                    <option value="7">7 — Sa 09:13 → Sa 16:55</option>
+                    <option value="8">8 — Sa 09:13 → Sa 18:13 (1 Umstieg!)</option>
+                    <option value="9">9 — Sa 09:36 → Sa 16:55</option>
+                    <option value="10">10 — Sa 15:13 → Sa 22:58</option>
+                </select>
+            </div>
+            <div class="timeline-select-group">
+                <label for="rueck-select">Rückfahrt (St. Anton → Heidelberg)</label>
+                <select id="rueck-select">
+                    <option value="6">6 — Mo 06:xx → Mo 13:xx (vor Mittag ✗)</option>
+                    <option value="7">7 — Mo 07:xx → Mo 14:xx (vor Mittag ✗)</option>
+                    <option value="8">8 — Mo 08:xx → Mo 15:xx</option>
+                    <option value="9">9 — Mo 09:xx → Mo 16:xx</option>
+                    <option value="10">10 — Mo 10:xx → Mo 17:xx</option>
+                    <option value="11" selected>11 — Mo 11:xx → Mo 18:xx (✓ NACH MITTAG)</option>
+                    <option value="12">12 — Mo 12:xx → Mo 19:xx (✓ NACH MITTAG)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="timeline-summary">
+            <div class="summary-card" id="summary-ski">
+                <span class="summary-icon">🎿</span>
+                <span class="summary-label">Ski-Zeit</span>
+                <span class="summary-value" id="total-ski-hours">~16h</span>
+            </div>
+            <div class="summary-card" id="summary-zug">
+                <span class="summary-icon">🚃</span>
+                <span class="summary-label">Zug-Zeit</span>
+                <span class="summary-value" id="total-zug-hours">~15h</span>
+            </div>
+            <div class="summary-card" id="summary-sleep">
+                <span class="summary-icon">🛏️</span>
+                <span class="summary-label">Schlaf</span>
+                <span class="summary-value" id="total-sleep-hours">~18h</span>
+            </div>
+            <div class="summary-card" id="summary-free">
+                <span class="summary-icon">☕</span>
+                <span class="summary-label">Frei/ Essen</span>
+                <span class="summary-value" id="total-free-hours">~7h</span>
+            </div>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-days">
+                <!-- SAMSTAG -->
+                <div class="timeline-day" id="day-sat">
+                    <div class="day-header">
+                        <span class="day-name">SAMSTAG</span>
+                        <span class="day-date">Sa, 4. April</span>
+                        <span class="day-theme" id="sat-theme">Ankunft & Ski</span>
+                    </div>
+                    <div class="day-timeline" id="sat-timeline">
+                        <!-- Blocks injected by JS -->
+                    </div>
+                    <div class="day-footer">
+                        <span class="ski-total" id="sat-ski">Ski: 0h</span>
+                    </div>
+                </div>
+
+                <!-- SONNTAG -->
+                <div class="timeline-day" id="day-sun">
+                    <div class="day-header">
+                        <span class="day-name">SONNTAG</span>
+                        <span class="day-date">So, 5. April</span>
+                        <span class="day-theme" id="sun-theme">Voller Ski-Tag</span>
+                    </div>
+                    <div class="day-timeline" id="sun-timeline">
+                        <!-- Blocks injected by JS -->
+                    </div>
+                    <div class="day-footer">
+                        <span class="ski-total" id="sun-ski">Ski: 0h</span>
+                    </div>
+                </div>
+
+                <!-- MONTAG -->
+                <div class="timeline-day" id="day-mon">
+                    <div class="day-header">
+                        <span class="day-name">MONTAG</span>
+                        <span class="day-date">Mo, 6. April</span>
+                        <span class="day-theme" id="mon-theme">Abreise</span>
+                    </div>
+                    <div class="day-timeline" id="mon-timeline">
+                        <!-- Blocks injected by JS -->
+                    </div>
+                    <div class="day-footer">
+                        <span class="ski-total" id="mon-ski">Ski: 0h</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-legend">
+                <div class="legend-item"><span class="legend-color" style="background: #3b82f6;"></span> Zug</div>
+                <div class="legend-item"><span class="legend-color" style="background: #22c55e;"></span> Ski</div>
+                <div class="legend-item"><span class="legend-color" style="background: #f97316;"></span> Essen</div>
+                <div class="legend-item"><span class="legend-color" style="background: #a855f7;"></span> Schlafen</div>
+                <div class="legend-item"><span class="legend-color" style="background: #6b7280;"></span> Frei</div>
+            </div>
+        </div>
+
+        <style>
+            .timeline-controls {
+                display: flex;
+                gap: 2rem;
+                margin-bottom: 1.5rem;
+                flex-wrap: wrap;
+            }
+            .timeline-select-group {
+                flex: 1;
+                min-width: 280px;
+            }
+            .timeline-select-group label {
+                display: block;
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .timeline-select-group select {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                background: var(--bg-elevated);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                color: var(--text);
+                font-size: 0.9rem;
+                cursor: pointer;
+            }
+            .timeline-select-group select:focus {
+                outline: none;
+                border-color: var(--accent-cyan);
+            }
+
+            .timeline-summary {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            @media (max-width: 600px) {
+                .timeline-summary { grid-template-columns: repeat(2, 1fr); }
+            }
+            .summary-card {
+                background: var(--bg-elevated);
+                border-radius: 12px;
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.25rem;
+            }
+            .summary-icon { font-size: 1.5rem; }
+            .summary-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+            .summary-value { font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan); }
+
+            .timeline-container {
+                background: var(--bg-card);
+                border-radius: 16px;
+                padding: 1.5rem;
+                overflow-x: auto;
+            }
+            .timeline-days {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                min-width: 700px;
+            }
+            @media (max-width: 900px) {
+                .timeline-days { grid-template-columns: 1fr; }
+            }
+            .timeline-day {
+                background: var(--bg-elevated);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            .day-header {
+                background: var(--accent-cyan);
+                color: var(--bg);
+                padding: 0.75rem 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+            .day-name { font-weight: 700; font-size: 0.9rem; }
+            .day-date { font-size: 0.7rem; opacity: 0.8; }
+            .day-theme { font-size: 0.65rem; opacity: 0.7; margin-top: 0.25rem; }
+            #day-sat .day-header { background: linear-gradient(135deg, #0ea5e9, #06b6d4); }
+            #day-sun .day-header { background: linear-gradient(135deg, #22c55e, #16a34a); }
+            #day-mon .day-header { background: linear-gradient(135deg, #a855f7, #9333ea); }
+
+            .day-timeline {
+                height: 320px;
+                position: relative;
+                padding: 0.5rem 0;
+            }
+
+            .timeline-block {
+                position: absolute;
+                left: 8px;
+                right: 8px;
+                border-radius: 6px;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.7rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
+                cursor: default;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .timeline-block:hover {
+                transform: scale(1.02);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10;
+            }
+            .timeline-block.train {
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                color: white;
+            }
+            .timeline-block.ski {
+                background: linear-gradient(135deg, #22c55e, #16a34a);
+                color: white;
+            }
+            .timeline-block.meal {
+                background: linear-gradient(135deg, #f97316, #ea580c);
+                color: white;
+            }
+            .timeline-block.sleep {
+                background: linear-gradient(135deg, #a855f7, #9333ea);
+                color: white;
+            }
+            .timeline-block.free {
+                background: linear-gradient(135deg, #6b7280, #4b5563);
+                color: white;
+            }
+            .timeline-block.checkin {
+                background: linear-gradient(135deg, #eab308, #ca8a04);
+                color: black;
+            }
+            .block-time {
+                font-size: 0.6rem;
+                opacity: 0.85;
+                font-weight: 600;
+            }
+            .block-label {
+                font-weight: 700;
+                font-size: 0.75rem;
+            }
+            .block-sub {
+                font-size: 0.6rem;
+                opacity: 0.8;
+            }
+
+            .day-footer {
+                padding: 0.75rem 1rem;
+                border-top: 1px solid var(--border);
+                text-align: center;
+            }
+            .ski-total {
+                font-weight: 700;
+                color: #22c55e;
+                font-size: 0.85rem;
+            }
+
+            .timeline-legend {
+                display: flex;
+                gap: 1.5rem;
+                justify-content: center;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--border);
+                flex-wrap: wrap;
+            }
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.75rem;
+                color: var(--text-muted);
+            }
+            .legend-color {
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+            }
+        </style>
+
+        <script>
+            const TRAIN_DATA = {
+                hin: {
+                    1: { dep: "17:13", arr: "06:09", overnight: true, label: "Nightjet", stops: "HD→MA→FFM→M→IN" },
+                    4: { dep: "02:25", arr: "10:55", overnight: false, label: "ICE 619 + RJX 368", stops: "HD→S→UL→A→M→IN" },
+                    5: { dep: "04:17", arr: "12:48", overnight: false, label: "ICE 699", stops: "HD→S→UL→A→M→IN" },
+                    6: { dep: "06:46", arr: "14:55", overnight: false, label: "ICE 1098 + ICE 525 + RJX 162", stops: "HD→MA→S→UL→M→IN" },
+                    7: { dep: "09:13", arr: "16:55", overnight: false, label: "ICE 117 + EC 164", stops: "HD→MA→KA→S→UL→M" },
+                    8: { dep: "09:13", arr: "18:13", overnight: false, label: "ICE 117 + RJX 87 (1 Umstieg!)", stops: "HD→MA→KA→S→UL→M→IN", best: true },
+                    9: { dep: "09:36", arr: "16:55", overnight: false, label: "ICE 1648 + ICE 593 + RJX 87", stops: "HD→...→M→..." },
+                    10: { dep: "15:13", arr: "22:58", overnight: false, label: "ICE 1095 + ICE 1205 + RJX 760", stops: "HD→...→M→..." }
+                },
+                rueck: {
+                    6: { dep: "06:00", arr: "13:00", label: "RJX + ICE" },
+                    7: { dep: "07:00", arr: "14:00", label: "RJX + ICE" },
+                    8: { dep: "08:00", arr: "15:00", label: "RJX + ICE" },
+                    9: { dep: "09:00", arr: "16:00", label: "RJX + ICE" },
+                    10: { dep: "10:00", arr: "17:00", label: "RJX + ICE" },
+                    11: { dep: "11:00", arr: "18:00", label: "RJX + ICE", best: true },
+                    12: { dep: "12:00", arr: "19:00", label: "RJX + ICE" }
+                }
+            };
+
+            function parseTime(timeStr) {
+                const [h, m] = timeStr.split(':').map(Number);
+                return h * 60 + m;
+            }
+
+            function formatTime(minutes) {
+                const h = Math.floor(minutes / 60) % 24;
+                const m = minutes % 60;
+                return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            }
+
+            function timeToPos(minutes, dayStart = 0) {
+                const t = minutes - dayStart;
+                return Math.max(0, Math.min(100, (t / 1440) * 100));
+            }
+
+            function createBlock(type, startMin, endMin, label, sub, dayStart) {
+                const top = timeToPos(startMin, dayStart);
+                const height = Math.max(2, timeToPos(endMin, dayStart) - top);
+                return `
+                    <div class="timeline-block ${type}" style="top: ${top}%; height: ${height}%;">
+                        <span class="block-time">${formatTime(startMin)} – ${formatTime(endMin)}</span>
+                        <span class="block-label">${label}</span>
+                        ${sub ? `<span class="block-sub">${sub}</span>` : ''}
+                    </div>
+                `;
+            }
+
+            function renderDay(timelineId, skiId, blocks, skiLabel) {
+                const el = document.getElementById(timelineId);
+                const skiEl = document.getElementById(skiId);
+                el.innerHTML = blocks.join('');
+
+                let skiMins = 0;
+                blocks.forEach(b => {
+                    if (b.includes('"ski"')) {
+                        const match = b.match(/top: ([\d.]+)%; height: ([\d.]+)%/);
+                        if (match) {
+                            skiMins += (parseFloat(match[2]) / 100) * 1440;
+                        }
+                    }
+                });
+                skiEl.textContent = `🎿 ${skiLabel}: ${Math.round(skiMins / 60)}h`;
+            }
+
+            function renderTimeline() {
+                const hinKey = document.getElementById('hin-select').value;
+                const rueckKey = parseInt(document.getElementById('rueck-select').value);
+
+                const hin = TRAIN_DATA.hin[hinKey] || TRAIN_DATA.hin[5];
+                const rueck = TRAIN_DATA.rueck[rueckKey] || TRAIN_DATA.rueck[11];
+
+                const SAT_START = 0; // 00:00
+                const SAT_DAY = 4 * 60; // 00:00 Sa = minute 0
+                const SUN_START = 24 * 60; // 00:00 So
+                const MON_START = 48 * 60; // 00:00 Mo
+
+                const blocksSat = [];
+                const blocksSun = [];
+                const blocksMon = [];
+
+                // =====================
+                // SAMSTAG
+                // =====================
+                if (hin.overnight) {
+                    // Nightjet: leg 1 ends late Friday, leg 2 arrives Sa 06:09
+                    blocksSat.push(createBlock('train', parseTime('17:13') - 24*60, parseTime('23:59') - 24*60, '🚃 ZUG (Teil 1)', hin.label, SAT_START));
+                    blocksSat.push(createBlock('train', parseTime('00:00'), parseTime('06:09'), '🚃 ZUG ankommt', 'St. Anton ' + hin.stops, SAT_START));
+                } else {
+                    // Day train: departs Saturday morning
+                    const depMin = parseTime(hin.dep);
+                    const arrMin = parseTime(hin.arr);
+                    blocksSat.push(createBlock('train', depMin, arrMin, '🚃 ZUG', hin.label + ' ' + hin.stops, SAT_START));
+                }
+
+                // Arrival time in minutes from midnight Saturday
+                const arrSat = hin.overnight ? parseTime('06:09') : parseTime(hin.arr);
+
+                // Breakfast after arrival
+                blocksSat.push(createBlock('meal', arrSat, arrSat + 60, '🍳 FRÜHSTÜCK', 'Ankunft & orientieren', SAT_START));
+
+                // Check if before or after 16:00
+                const checkinTime = Math.max(arrSat + 90, parseTime('16:00'));
+                if (checkinTime < parseTime('21:00')) {
+                    blocksSat.push(createBlock('checkin', arrSat + 60, checkinTime, '🏨 CHECK-IN', 'Ciao Amore', SAT_START));
+                    blocksSat.push(createBlock('ski', checkinTime, parseTime('21:00'), '🎿 SKI', 'Nachmittag/Abend', SAT_START));
+                } else {
+                    // Arrival after checkin time
+                    blocksSat.push(createBlock('free', arrSat + 60, parseTime('16:00'), '⏰ FREI', 'Warten auf Check-in', SAT_START));
+                    blocksSat.push(createBlock('checkin', parseTime('16:00'), parseTime('17:00'), '🏨 CHECK-IN', 'Ciao Amore', SAT_START));
+                    blocksSat.push(createBlock('ski', parseTime('17:00'), parseTime('21:00'), '🎿 SKI', 'Abend-Session!', SAT_START));
+                }
+
+                blocksSat.push(createBlock('meal', parseTime('19:00'), parseTime('21:00'), '🍝 ABENDESSEN', 'oder vorher', SAT_START));
+                blocksSat.push(createBlock('free', parseTime('21:00'), parseTime('22:00'), '☕ FREI', 'Apres-Ski / Ausklingen', SAT_START));
+                blocksSat.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00') + 24*60, '🛏️ SCHLAF', 'Ciao Amore', SAT_START));
+
+                // =====================
+                // SONNTAG
+                // =====================
+                blocksSun.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00'), '🛏️ SCHLAF', '', SUN_START));
+                blocksSun.push(createBlock('meal', parseTime('08:00'), parseTime('09:00'), '🍳 FRÜHSTÜCK', 'Ciao Amore inkl.', SUN_START));
+                blocksSun.push(createBlock('ski', parseTime('09:00'), parseTime('12:30'), '🎿 SKI', 'Vormittag', SUN_START));
+                blocksSun.push(createBlock('meal', parseTime('12:30'), parseTime('13:30'), '🍕 MITTAGESSEN', 'Berg oder Ort', SUN_START));
+                blocksSun.push(createBlock('ski', parseTime('13:30'), parseTime('17:00'), '🎿 SKI', 'Nachmittag', SUN_START));
+                blocksSun.push(createBlock('free', parseTime('17:00'), parseTime('19:00'), '☕ FREI', 'Apres-Ski', SUN_START));
+                blocksSun.push(createBlock('meal', parseTime('19:00'), parseTime('21:00'), '🍝 ABENDESSEN', 'Ort', SUN_START));
+                blocksSun.push(createBlock('free', parseTime('21:00'), parseTime('22:00'), '☕ FREI', 'Nachtleben?', SUN_START));
+                blocksSun.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00') + 24*60, '🛏️ SCHLAF', '', SUN_START));
+
+                // =====================
+                // MONTAG
+                // =====================
+                const rueckDep = parseTime(rueck.dep);
+                blocksMon.push(createBlock('sleep', parseTime('22:00'), parseTime('08:00'), '🛏️ SCHLAF', '', MON_START));
+                blocksMon.push(createBlock('meal', parseTime('08:00'), parseTime('09:00'), '🍳 FRÜHSTÜCK', 'Letztes!', MON_START));
+                blocksMon.push(createBlock('ski', parseTime('09:00'), rueckDep, '🎿 SKI', `Vormittag bis ${formatTime(rueckDep)}`, MON_START));
+                blocksMon.push(createBlock('free', rueckDep, rueckDep + 30, '🎒 PACKEN', 'Blitz-Transfer', MON_START));
+                blocksMon.push(createBlock('train', rueckDep + 30, parseTime(rueck.arr), '🚃 ZUG', rueck.label + ' → Heidelberg', MON_START));
+                blocksMon.push(createBlock('free', parseTime(rueck.arr), parseTime(rueck.arr) + 60, '🏠 ANKUNFT', 'Heidelberg', MON_START));
+
+                // Render
+                renderDay('sat-timeline', 'sat-ski', blocksSat, 'Sa');
+                renderDay('sun-timeline', 'sun-ski', blocksSun, 'So');
+                renderDay('mon-timeline', 'mon-ski', blocksMon, 'Mo');
+
+                // Update summary
+                let totalSki = 0;
+                ['sat', 'sun', 'mon'].forEach(day => {
+                    const skiText = document.getElementById(day + '-ski').textContent;
+                    const match = skiText.match(/(\d+)h/);
+                    if (match) totalSki += parseInt(match[1]);
+                });
+                document.getElementById('total-ski-hours').textContent = '~' + totalSki + 'h';
+
+                // Calculate ski hours more accurately from blocks
+                let skiSat = 0, skiSun = 0, skiMon = 0;
+                blocksSat.forEach(b => { if (b.includes('"ski"')) { const m = b.match(/height: ([\d.]+)%/); if (m) skiSat += (parseFloat(m[1])/100)*1440; }});
+                blocksSun.forEach(b => { if (b.includes('"ski"')) { const m = b.match(/height: ([\d.]+)%/); if (m) skiSun += (parseFloat(m[1])/100)*1440; }});
+                blocksMon.forEach(b => { if (b.includes('"ski"')) { const m = b.match(/height: ([\d.]+)%/); if (m) skiMon += (parseFloat(m[1])/100)*1440; }});
+
+                document.getElementById('sat-ski').textContent = `🎿 Sa: ~${Math.round(skiSat/60)}h`;
+                document.getElementById('sun-ski').textContent = `🎿 So: ~${Math.round(skiSun/60)}h`;
+                document.getElementById('mon-ski').textContent = `🎿 Mo: ~${Math.round(skiMon/60)}h (vor Abfahrt)`;
+                document.getElementById('total-ski-hours').textContent = `~${Math.round((skiSat+skiSun+skiMon)/60)}h`;
+
+                // Update themes
+                document.getElementById('sat-theme').textContent = hin.overnight ? 'MAX SKI! 🌙' : 'Ankunft & Ski';
+                document.getElementById('mon-theme').textContent = `Abreise ${formatTime(rueckDep)} Uhr`;
+            }
+
+            // Init
+            document.addEventListener('DOMContentLoaded', () => {
+                renderTimeline();
+                document.getElementById('hin-select').addEventListener('change', renderTimeline);
+                document.getElementById('rueck-select').addEventListener('change', renderTimeline);
+            });
+        </script>
+    </section>
+
+    <!-- Unterkunft Section -->
+    <section class="section" id="unterkunft">
+        <div class="section-header">
+            <span class="section-tag">Unterkunft</span>
+            <h2 class="section-title">Ciao Amore</h2>
+        </div>
+        
+        <div class="unterkunft-grid">
+            <div class="card unterkunft-main">
+                <div class="hotel-type">Pension</div>
+                <div class="hotel-name">Ciao Amore</div>
+                <div class="hotel-rating">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty">★</span>
+                    <span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 0.5rem;">4/5</span>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    "Sehr günstige Unterkunft für St. Anton (9.2/10, top Frühstück)"
+                </p>
+                
+                <div class="hotel-features">
+                    <span class="feature-chip">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        </svg>
+                        Check-in ab 16:00
+                    </span>
+                    <span class="feature-chip">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        750m zum Lift
+                    </span>
+                    <span class="feature-chip">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                            <line x1="6" y1="1" x2="6" y2="4"/>
+                            <line x1="10" y1="1" x2="10" y2="4"/>
+                            <line x1="14" y1="1" x2="14" y2="4"/>
+                        </svg>
+                        Frühstück
+                    </span>
+                    <span class="feature-chip">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Sa-So-Mo (2 Nächte)
+                    </span>
+                </div>
+                
+                <div class="hotel-map" style="padding: 0; overflow: hidden;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2694.4!2d10.2682!3d47.1296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDA3JzQ2LjIiTiAxMMKwMTUnNTMuMiJF!5e0!3m2!1sde!2sat!4v1234567890"
+                        width="100%" 
+                        height="200" 
+                        style="border:0; border-radius: 12px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <a href="https://www.google.com/maps/place/St.+Anton+am+Arlberg" target="_blank" class="btn btn-secondary" style="margin-top: 1rem; display: inline-flex; width: 100%; justify-content: center; gap: 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    In Google Maps öffnen
+                </a>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Warum Ciao Amore?</h3>
+                <ul style="color: var(--text-muted); font-size: 0.875rem; list-style: none;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">✓ Top Bewertung (9.2/10)</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">✓ Frühstück inklusive</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">✓ Günstig für St. Anton</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">✓ Zentrumsnah</li>
+                    <li style="padding: 0.5rem 0;">✓ Skibus vor der Tür</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Lift-Info</h3>
+                <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+                    Die Nassereinbahn ist 750m entfernt — ca. 8-10 Min. zu Fuß mit Skischuhen.
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">
+                    <strong style="color: var(--accent-cyan);">Alternative:</strong> Skibus nutzen, Haltestelle direkt vor der Tür.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skibus & Lift Section -->
+    <section class="section" id="skibus">
+        <div class="section-header">
+            <span class="section-tag">Mobilität</span>
+            <h2 class="section-title">Skibus & Lifte</h2>
+        </div>
+        
+        <div class="overview-grid">
+            <div class="card overview-card icon-transport">
+                <div class="overview-card-icon">🚌</div>
+                <h3>Skibus-Linien</h3>
+                <p> Kostenlos mit Gastocard im Ort unterwegs. Linien 1-9 verbinden das gesamte Skigebiet.</p>
+                <div style="margin-top: 1rem;">
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Wichtige Linien:</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span class="feature-chip">Linie 1 — Zentrum "AntOOn"</span>
+                        <span class="feature-chip">Linie 4 — Nasserein</span>
+                        <span class="feature-chip">Linie 760 — Lech/Zürs</span>
+                        <span class="feature-chip">Nachtbus — Linien 2,3,4,10</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card overview-card icon-skipass">
+                <div class="overview-card-icon">⏰</div>
+                <h3>Betriebszeiten Lifte</h3>
+                <p>Ca. 08:30 — 16:30 Uhr (variiert nach Lift und Tag)</p>
+                <div style="margin-top: 1rem;">
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Aktueller Status:</div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--accent-cyan);">83/85</div>
+                            <div style="font-size: 0.65rem; color: var(--text-muted);">Lifte</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--accent-gold);">281km</div>
+                            <div style="font-size: 0.65rem; color: var(--text-muted);">Pisten</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--accent-neon);">280cm</div>
+                            <div style="font-size: 0.65rem; color: var(--text-muted);">Schnee</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card overview-card icon-budget">
+                <div class="overview-card-icon">🏔️</div>
+                <h3>Saisonende 2026</h3>
+                <p><strong style="color: var(--accent-gold);">19. April 2026</strong></p>
+                <p style="font-size: 0.8rem; margin-top: 0.5rem;">"Sonnenskilauf" — Ostern liegt voll in der Saison!</p>
+                <div style="margin-top: 1rem;">
+                    <span class="feature-chip" style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88;">
+                        ✅ Geöffnet bis 19. April
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skipass Section -->
+    <section class="section" id="skipass">
+        <div class="section-header">
+            <span class="section-tag">Skitickets</span>
+            <h2 class="section-title">Skipass Ski Arlberg</h2>
+        </div>
+        
+        <div class="skipass-grid">
+            <div class="card skipass-card">
+                <div class="skipass-days">½</div>
+                <div class="skipass-label">Tag ab 12h</div>
+                <div class="skipass-price">€ 62,50</div>
+                <div class="skipass-per-day">Halbtageskarte</div>
+            </div>
+            
+            <div class="card skipass-card">
+                <div class="skipass-days">1</div>
+                <div class="skipass-label">Tag</div>
+                <div class="skipass-price">€ 81,50</div>
+                <div class="skipass-per-day">pro Tag</div>
+            </div>
+            
+            <div class="card skipass-card recommended">
+                <div class="skipass-days">3</div>
+                <div class="skipass-label">Tage</div>
+                <div class="skipass-price">€ 241</div>
+                <div class="skipass-per-day">€ 80,33 / Tag</div>
+            </div>
+            
+            <div class="card skipass-card">
+                <div class="skipass-days">6</div>
+                <div class="skipass-label">Tage</div>
+                <div class="skipass-price">€ 450</div>
+                <div class="skipass-per-day">€ 75 / Tag</div>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-top: 2rem;">
+            <h3 style="margin-bottom: 1rem;">Spar-Strategie</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                <strong style="color: var(--accent-neon);">1-Tageskarte (81,50€)</strong> ist fast gleich viel wie 
+                <strong style="color: var(--accent-gold);">3-Tages-Pass pro Tag (80,33€)</strong> — 
+                daher lohnt sich der 3-Tages-Pass für 2 volle Skitage!
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="feature-chip" style="background: rgba(255, 51, 102, 0.1); border: 1px solid var(--accent-neon);">
+                    🎿 St. Anton
+                </div>
+                <div class="feature-chip" style="background: rgba(255, 51, 102, 0.1); border: 1px solid var(--accent-neon);">
+                    🏔️ Lech / Zürs
+                </div>
+                <div class="feature-chip" style="background: rgba(255, 51, 102, 0.1); border: 1px solid var(--accent-neon);">
+                    ⛰️ Warth / Schröcken
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">
+                Ein Skipass gilt für alle 7 Orte im Ski Arlberg Verbund. Hub-and-Spoke: In St. Anton übernachten, täglich alle Gebiete anfahren.
+            </p>
+        </div>
+    </section>
+
+    <!-- Budget Section -->
+    <section class="section" id="budget">
+        <div class="section-header">
+            <span class="section-tag">Kosten</span>
+            <h2 class="section-title">Budget Plan</h2>
+        </div>
+        
+        <div class="card">
+            <table class="budget-table">
+                <tr>
+                    <td>Unterkunft (2 Nächte)</td>
+                    <td>€ 180</td>
+                </tr>
+                <tr>
+                    <td>3-Tage-Skipass</td>
+                    <td>€ 241</td>
+                </tr>
+                <tr>
+                    <td>Zug (FlexTicket)</td>
+                    <td>€ 0*</td>
+                </tr>
+                <tr>
+                    <td>Verpflegung (ca.)</td>
+                    <td>€ 80</td>
+                </tr>
+                <tr>
+                    <td>Après-Ski / Nachtleben</td>
+                    <td>€ 60</td>
+                </tr>
+                <tr class="total">
+                    <td>Gesamt</td>
+                    <td>€ 561**</td>
+                </tr>
+            </table>
+            <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 1.5rem;">
+                * FlexTicket bereits bezahlt (Winterkulanz) &nbsp;|&nbsp; 
+                ** Mit Verpflegung und Nachtleben. Eigene Ski = kein Verleih nötig.
+            </p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+            <div class="card" style="text-align: center;">
+                <div style="font-family: 'Bebas Neue'; font-size: 3rem; color: var(--accent-cyan);">€ 180</div>
+                <div style="color: var(--text-muted); font-size: 0.8rem;">Unterkunft</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-family: 'Bebas Neue'; font-size: 3rem; color: var(--accent-gold);">€ 241</div>
+                <div style="color: var(--text-muted); font-size: 0.8rem;">Skipass</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-family: 'Bebas Neue'; font-size: 3rem; color: var(--accent-neon);">€ 140</div>
+                <div style="color: var(--text-muted); font-size: 0.8rem;">Essen + Spaß</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nachtleben Section -->
+    <section class="section" id="nachtleben">
+        <div class="section-header">
+            <span class="section-tag">Abends</span>
+            <h2 class="section-title">Nachtleben & Après-Ski</h2>
+        </div>
+        
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+            St. Anton ist die <strong style="color: var(--accent-neon);">"Après-Ski Hauptstadt der Alpen"</strong> — 
+            legendäres Nachtleben direkt an der Piste.
+        </p>
+        
+        <div class="nachtleben-grid">
+            <div class="card location-card">
+                <div class="location-category">Pistenparty</div>
+                <div class="location-name">MooserWirt</div>
+                <div class="location-desc">Der Klassiker — Après-Ski ab dem Nachmittag, direkt an der Piste. Musik, Stimmung, durchfeiern.</div>
+            </div>
+            
+            <div class="card location-card">
+                <div class="location-category">Pistenparty</div>
+                <div class="location-name">Krazy Kanguruh</div>
+                <div class="location-desc">Die zweite legendäre Pistenbar. Gute Musik, viele Locals, Après-Ski-Stimmung bis spät in die Nacht.</div>
+            </div>
+            
+            <div class="card location-card">
+                <div class="location-category">Bar</div>
+                <div class="location-name">Piccadilly Pub</div>
+                <div class="location-desc">Live-Musik am Abend. Klassische Pub-Atmosphäre mit Cocktails und guter Stimmung.</div>
+            </div>
+            
+            <div class="card location-card">
+                <div class="location-category">Club</div>
+                <div class="location-name">Postkeller</div>
+                <div class="location-desc">Der Nachtclub in St. Anton —offiziell bis in die Morgenstunden geöffnet. Durchmachen ist drin!</div>
+            </div>
+            
+            <div class="card location-card">
+                <div class="location-category">Bar</div>
+                <div class="location-name">Bar Cuba</div>
+                <div class="location-desc">Sportsbar-Flair mit Cocktails. Perfekt für einen entspannten Abend nach dem Skifahren.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packliste Section -->
+    <section class="section" id="packliste">
+        <div class="section-header">
+            <span class="section-tag">Vergessen?</span>
+            <h2 class="section-title">Packliste</h2>
+        </div>
+        
+        <div class="checklist">
+            <div class="checklist-column">
+                <h4>Skiausrüstung</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ski">
+                    <label for="ski">Ski</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="skischuhe">
+                    <label for="skischuhe">Skischuhe</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="skistoecke">
+                    <label for="skistoecke">Skistöcke</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="helm">
+                    <label for="helm">Helm</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="brille">
+                    <label for="brille">Ski-Brille</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="handschuhe">
+                    <label for="handschuhe">Ski-Handschuhe</label>
+                </div>
+            </div>
+            
+            <div class="checklist-column">
+                <h4>Kleidung</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="thermo">
+                    <label for="thermo">Thermo-Unterwäsche</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="socken">
+                    <label for="socken">Ski-Socken (2-3 Paar)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="haube">
+                    <label for="haube">Mütze / Beanie</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="sonnenbrille">
+                    <label for="sonnenbrille">Sonnenbrille</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="freizeit">
+                    <label for="freizeit">Freizeit-Klamotten</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="nacht">
+                    <label for="nacht">Nachtleben-Outfit</label>
+                </div>
+            </div>
+            
+            <div class="checklist-column">
+                <h4>Dokumente & Geld</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ticket">
+                    <label for="ticket">FlexTicket (Hin + Rück)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ausweis">
+                    <label for="ausweis">Personalausweis</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="bahncard">
+                    <label for="bahncard">BahnCard</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="bar">
+                    <label for="bar">Bargeld (€)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="karte">
+                    <label for="karte">Kreditkarte</label>
+                </div>
+            </div>
+            
+            <div class="checklist-column">
+                <h4>Sonstiges</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="rucksack">
+                    <label for="rucksack">Tagesrucksack</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="sonnencreme">
+                    <label for="sonnencreme">Sonnencreme (LSF 50+)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="lippen">
+                    <label for="lippen">Lippenpflege</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="handy">
+                    <label for="handy">Handy + Ladekabel</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="powerbank">
+                    <label for="powerbank">Powerbank</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="kopfhoerer">
+                    <label for="kopfhoerer">Kopfhörer</label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Bereit für St. Anton?</h2>
+        <p class="cta-subtitle">Osterwochenende 2026 — Die Alpen warten</p>
+        <div class="cta-buttons">
+            <a href="https://www.bahn.de" target="_blank" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="9" y1="21" x2="9" y2="9"/>
+                </svg>
+                Zugverbindung checken
+            </a>
+            <a href="https://www.skiarlberg.com" target="_blank" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                    <line x1="4" y1="22" x2="4" y2="15"/>
+                </svg>
+                Skipass vorbestellen
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">ST.ANTON'26</div>
+        <p>Osterwochenende — Ski Arlberg — Aprés-Ski Hauptstadt der Alpen</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .section-header').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
