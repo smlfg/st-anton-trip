@@ -1307,13 +1307,12 @@
             <div class="timeline-select-group">
                 <label for="rueck-select">Rückfahrt (St. Anton → Heidelberg)</label>
                 <select id="rueck-select">
-                    <option value="6">6 — Mo 06:xx → Mo 13:xx (vor Mittag ✗)</option>
-                    <option value="7">7 — Mo 07:xx → Mo 14:xx (vor Mittag ✗)</option>
-                    <option value="8">8 — Mo 08:xx → Mo 15:xx</option>
-                    <option value="9">9 — Mo 09:xx → Mo 16:xx</option>
-                    <option value="10">10 — Mo 10:xx → Mo 17:xx</option>
-                    <option value="11" selected>11 — Mo 11:xx → Mo 18:xx (✓ NACH MITTAG)</option>
-                    <option value="12">12 — Mo 12:xx → Mo 19:xx (✓ NACH MITTAG)</option>
+                    <option value="tue-6">Di 6:xx → Di 13:xx (vor Mittag ✗)</option>
+                    <option value="tue-7">Di 7:xx → Di 14:xx (vor Mittag ✗)</option>
+                    <option value="tue-8">Di 8:xx → Di 15:xx</option>
+                    <option value="tue-9">Di 9:xx → Di 16:xx (✓ NACH MITTAG)</option>
+                    <option value="tue-10">Di 10:xx → Di 17:xx (✓ NACH MITTAG)</option>
+                    <option value="tue-11">Di 11:xx → Di 18:xx (✓ NACH MITTAG)</option>
                 </select>
             </div>
         </div>
@@ -1599,13 +1598,12 @@
                     10: { dep: "15:13", arr: "22:58", overnight: false, label: "ICE 1095 + ICE 1205 + RJX 760", stops: "HD→...→M→..." }
                 },
                 rueck: {
-                    6: { dep: "06:00", arr: "13:00", label: "RJX + ICE" },
-                    7: { dep: "07:00", arr: "14:00", label: "RJX + ICE" },
-                    8: { dep: "08:00", arr: "15:00", label: "RJX + ICE" },
-                    9: { dep: "09:00", arr: "16:00", label: "RJX + ICE" },
-                    10: { dep: "10:00", arr: "17:00", label: "RJX + ICE" },
-                    11: { dep: "11:00", arr: "18:00", label: "RJX + ICE", best: true },
-                    12: { dep: "12:00", arr: "19:00", label: "RJX + ICE" }
+                    "tue-6": { dep: "06:00", arr: "13:00", label: "RJX + ICE", day: "tue" },
+                    "tue-7": { dep: "07:00", arr: "14:00", label: "RJX + ICE", day: "tue" },
+                    "tue-8": { dep: "08:00", arr: "15:00", label: "RJX + ICE", day: "tue" },
+                    "tue-9": { dep: "09:00", arr: "16:00", label: "RJX + ICE", day: "tue", best: true },
+                    "tue-10": { dep: "10:00", arr: "17:00", label: "RJX + ICE", day: "tue" },
+                    "tue-11": { dep: "11:00", arr: "18:00", label: "RJX + ICE", day: "tue" }
                 }
             };
 
